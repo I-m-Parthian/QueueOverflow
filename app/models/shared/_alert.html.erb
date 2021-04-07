@@ -1,0 +1,11 @@
+<% flash[:notice].each do |notice| %>
+  <div class="alert alert-success">
+    <%= notice %>
+  </div>
+<% end %>
+
+<% flash[:alert].each do |alert| %>
+  <div class="alert alert-warning">
+    <%= alert %>
+  </div>
+<% end %>
