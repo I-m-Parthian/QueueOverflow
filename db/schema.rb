@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_04_08_102520) do
   enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
-    t.text "content"
+    t.text "content", default: "", null: false
     t.integer "up_vote"
     t.integer "down_vote"
     t.datetime "created_at", precision: 6, null: false
