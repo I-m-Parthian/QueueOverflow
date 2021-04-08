@@ -11,5 +11,9 @@
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3.11.2"
-  }
+  },
+  "main": "index.js",
+  "repository": "git@gitlab.com:mountblue/cohort-15-ruby/capstone-team-3.git",
+  "author": "saurabh.upadhyay <saurabh.upadhyay@mountblue.tech>",
+  "license": "MIT"
 }
