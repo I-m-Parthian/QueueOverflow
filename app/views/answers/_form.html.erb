@@ -17,13 +17,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :up_vote %>
-    <%= form.number_field :up_vote %>
+    <% form.label :up_vote %>
+    <%= form.number_field :up_vote, value: 0, type: :hidden %>
   </div>
 
   <div class="field">
-    <%= form.label :down_vote %>
-    <%= form.number_field :down_vote %>
+    <% form.label :down_vote %>
+    <%= form.number_field :down_vote, value: 0, type: :hidden %>
   </div>
 
   <div class="actions">
