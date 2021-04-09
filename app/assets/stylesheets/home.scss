@@ -59,6 +59,9 @@
 .tg{
     color: gray;
 }
+.to{
+    color: #E65F00;
+}
 .main-box{
     min-height: 100px;
     background-color: #373D41;
@@ -83,6 +86,7 @@
     font-size: 12px;
     padding: 12px 25px;
     letter-spacing: 1px;
+    margin-top: 5px;
 }
 .btn-orange{
     background-color: #e7843d;
@@ -116,7 +120,21 @@
     color: gray;
     text-align: center;
 }
-//--------------------------- end Home --------------------------------
+//--------------------------- start about --------------------------------
+
+//--------------------------- start team --------------------------------
+.card-box{
+    min-height: 100px;
+    border-radius: 5px;
+}
+.card-box img{
+    width:100%;
+}
+.card-box .card-text{
+    padding: 10px;
+    text-align: center;
+}
+
 
 .main-body{
     min-height: 100vh;

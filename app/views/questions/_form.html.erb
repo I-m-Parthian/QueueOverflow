@@ -1,0 +1,25 @@
+<%= form_with(model: question) do |form| %>
+  <% if question.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+        <% question.errors.each do |error| %>
+        <div><%= error.full_message %></div>
+      <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Select tag" %>
+    <%= form.select :tag, %w[C++ Java Ruby JS Sql Postgres Others]%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
