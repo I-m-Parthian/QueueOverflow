@@ -10,6 +10,7 @@ class AnswersController < ApplicationController
   def show
   end
 
+
   # GET /answers/new
   def new
     @answer = Answer.new
@@ -55,7 +56,7 @@ class AnswersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_answer
@@ -66,4 +67,6 @@ class AnswersController < ApplicationController
     def answer_params
       params.require(:answer).permit(:content, :up_vote, :down_vote)
     end
+
+    
 end
