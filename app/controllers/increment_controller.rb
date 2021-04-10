@@ -1,16 +1,23 @@
 class IncrementController < ApplicationController
+
+    # before_action :authenticate_user!, only: %i[increment_votes]
     def increment_votes
-        a = request.params[:id]
+        if user_signed_in?
+            a = request.params[:id]
 
-        vote_type = request.params[:format]
+            vote_type = request.params[:format]
 
-        @answer = Answer.find(a)
-        
-        if vote_type == 'up_vote'
-            @answer.increment!(:up_vote)
-        elsif vote_type == 'down_vote'
-            @answer.increment!(:down_vote)
+            @answer = Answer.find(a)
+            
+            if vote_type == 'up_vote'
+                @answer.increment!(:up_vote)
+            elsif vote_type == 'down_vote'
+                @answer.increment!(:down_vote)
+            end
+            redirect_to answers_path(@answer)
+        else
+            flash[:alert] = "Please Sign In..."
+            redirect_to new_user_session_path
         end
-        redirect_to answers_path(@answer)
     end
 end

@@ -5,3 +5,26 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+#  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+require "faker"
+
+20.times do
+    q = Question.new(
+        content: Faker::Quote.famous_last_words,
+        tag: "others",
+    )
+    q.save
+end
+
+20.times do
+    q = Answer.new(
+        content: Faker::Quote.famous_last_words,
+        up_vote: 0,
+        down_vote: 0,
+    )
+    q.save
+end
+
+
