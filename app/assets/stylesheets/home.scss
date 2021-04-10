@@ -50,6 +50,12 @@
     border-radius: 2px;
 }
 
+.nav-login-btn{
+    background-color: lightblue;
+    border: 1px solid gray;
+    color: #0364CF;
+}
+
 //--------------------------- end Navbar --------------------------------
 
 //--------------------------- start Home --------------------------------
@@ -154,7 +160,7 @@
     color:#ffa462;
 }
 .footer-link:hover{
-    color: #FF7A00;
+    color: #FF7A00 ;
     text-decoration: none;
 }
 

@@ -6,8 +6,19 @@
 <% end  %>
 
 <% if flash[:alert] %>
+  <div class="alert alert-danger alert-dismissible fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <%- flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+    <%- end -%>
+  </div>
+<%- end -%>
+
+<!--
+<% if flash[:alert] %>
     <div class="alert alert-danger alert-dismissible fade in">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <%= alert %>
     </div>
 <% end  %>
+-->
