@@ -24,10 +24,9 @@ class AnswersController < ApplicationController
   # POST /answers or /answers.json
   def create
     @answer = Answer.new(answer_params)
-
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to @answer, notice: "Answer was successfully created." }
+        format.html { redirect_to questions_path, notice: "Answer was successfully created." }
         format.json { render :show, status: :created, location: @answer }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +39,7 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       if @answer.update(answer_params)
-        format.html { redirect_to @answer, notice: "Answer was successfully updated." }
+        format.html { redirect_to questions_path, notice: "Answer was successfully updated." }
         format.json { render :show, status: :ok, location: @answer }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -66,7 +65,7 @@ class AnswersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def answer_params
-      params.require(:answer).permit(:content, :up_vote, :down_vote)
+      params.require(:answer).permit(:content, :up_vote, :down_vote, :question_id)
     end
 
     

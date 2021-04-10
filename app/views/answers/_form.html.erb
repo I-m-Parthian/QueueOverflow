@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+  <% request.params.inspect %>
+
   <div class="field">
     <%= form.label :content %>
     <%= form.text_area :content %>
@@ -24,6 +26,11 @@
   <div class="field">
     <% form.label :down_vote %>
     <%= form.number_field :down_vote, value: 0, type: :hidden %>
+  </div>
+
+  <div class="field">
+    <% form.label :question_id %>
+    <%= form.number_field :question_id, value: params['format'], type: :hidden %>
   </div>
 
   <div class="actions">

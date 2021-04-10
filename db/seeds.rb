@@ -19,12 +19,15 @@ require "faker"
 end
 
 20.times do
+    number = 80
     q = Answer.new(
         content: Faker::Quote.famous_last_words,
         up_vote: 0,
         down_vote: 0,
+        question_id: number
     )
     q.save
+    number += 1
 end
 
 
