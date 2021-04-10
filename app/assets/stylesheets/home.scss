@@ -50,6 +50,12 @@
     border-radius: 2px;
 }
 
+.nav-login-btn{
+    background-color: lightblue;
+    border: 1px solid gray;
+    color: #0364CF;
+}
+
 //--------------------------- end Navbar --------------------------------
 
 //--------------------------- start Home --------------------------------
@@ -126,9 +132,11 @@
 .card-box{
     min-height: 100px;
     border-radius: 5px;
+    background-color: lightgray;
 }
 .card-box img{
     width:100%;
+    border-radius: 5px 5px 0px 0px;
 }
 .card-box .card-text{
     padding: 10px;
@@ -152,7 +160,7 @@
     color:#ffa462;
 }
 .footer-link:hover{
-    color: #FF7A00;
+    color: #FF7A00 ;
     text-decoration: none;
 }
 

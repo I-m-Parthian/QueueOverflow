@@ -25,7 +25,9 @@
   <body>
     <%= render partial: "shared/navbar" %>
     <div class="main-body">
-      <%= render partial: "shared/alert" %>
+      <div class="container">
+        <%= render partial: "shared/alert" %>
+      </div>
       <%= yield %>
     </div>
     <%= render partial: "shared/footer" %>
