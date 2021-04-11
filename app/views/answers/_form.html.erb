@@ -19,12 +19,12 @@
 
   <div class="field">
     <% form.label :up_vote %>
-    <%= form.number_field :up_vote, value: 0, type: :hidden %>
+    <%= form.number_field :up_vote, value: answer.up_vote.nil? ? 0 : answer.up_vote, type: :hidden %>
   </div>
 
   <div class="field">
     <% form.label :down_vote %>
-    <%= form.number_field :down_vote, value: 0, type: :hidden %>
+    <%= form.number_field :down_vote, value: answer.down_vote.nil? ? 0 : answer.down_vote, type: :hidden %>
   </div>
 
    <div class="field">

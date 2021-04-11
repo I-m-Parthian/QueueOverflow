@@ -14,7 +14,7 @@ class IncrementController < ApplicationController
             elsif vote_type == 'down_vote'
                 @answer.increment!(:down_vote)
             end
-            redirect_to answers_path
+            redirect_to controller: 'questions', action: 'show', id: @answer.question_id
         else
             flash[:alert] = "Please Sign In..."
             redirect_to new_user_session_path
