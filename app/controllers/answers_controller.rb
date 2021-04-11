@@ -26,7 +26,7 @@ class AnswersController < ApplicationController
     @answer = Answer.new(answer_params)
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to questions_path, notice: "Answer was successfully created." }
+        format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id, notice: "Answer was successfully created." }
         format.json { render :show, status: :created, location: @answer }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       if @answer.update(answer_params)
-        format.html { redirect_to questions_path, notice: "Answer was successfully updated." }
+        format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id, notice: "Answer was successfully updated." }
         format.json { render :show, status: :ok, location: @answer }
       else
         format.html { render :edit, status: :unprocessable_entity }

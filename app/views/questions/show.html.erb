@@ -34,7 +34,7 @@
           <td><%= answer.up_vote %></td>
           <td><%= answer.down_vote %></td>
           <td><%= link_to 'Show', answer %></td>
-          <td><%= link_to 'Edit', edit_answer_path(answer) %></td>
+          <td><%= link_to 'Edit', edit_answer_path(answer, question: @question.id) %></td>
           <td><%= link_to 'Destroy', answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <td><%= link_to 'Up_Vote',  increment_path(answer,'up_vote'), method: :put %></td>
           <td><%= link_to 'Down_Vote', increment_path(answer,'down_vote'), method: :put %></td>
@@ -43,4 +43,4 @@
     </tbody>
   </table>
 <% end %>
-<%= link_to 'New Answer', new_answer_path(@question.id) %>
+<%= link_to 'New Answer', new_answer_path(:question => @question.id) %>
