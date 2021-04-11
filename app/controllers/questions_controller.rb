@@ -23,6 +23,7 @@ class QuestionsController < ApplicationController
 
   # POST /questions or /questions.json
   def create
+    # render plain: question_params 
     @question = Question.new(question_params)
 
     respond_to do |format|
@@ -66,6 +67,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:content, :tag)
+      params.require(:question).permit(:content, :tag, :user_id)
     end
 end
