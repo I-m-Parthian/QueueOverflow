@@ -19,6 +19,10 @@ class AnswersController < ApplicationController
 
   # GET /answers/1/edit
   def edit
+    if current_user.id != @answer.user_id
+      flash[:alert] =  "Not Authorized User"
+      redirect_to controller: 'questions', action: 'show', id: @answer.question_id
+    end
   end
 
   # POST /answers or /answers.json
@@ -26,7 +30,8 @@ class AnswersController < ApplicationController
     @answer = Answer.new(answer_params)
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id, notice: "Answer was successfully created." }
+        flash[:notice] = "Answer was successfully created"
+        format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id}
         format.json { render :show, status: :created, location: @answer }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -37,23 +42,35 @@ class AnswersController < ApplicationController
 
   # PATCH/PUT /answers/1 or /answers/1.json
   def update
-    respond_to do |format|
-      if @answer.update(answer_params)
-        format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id, notice: "Answer was successfully updated." }
-        format.json { render :show, status: :ok, location: @answer }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
+    if current_user.id != @answer.user_id
+      respond_to do |format|
+        if @answer.update(answer_params)
+          flash[:notice] = "Answer was successfully updated"
+          format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id }
+          format.json { render :show, status: :ok, location: @answer }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @answer.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] =  "Not Authorized User"
+      redirect_to controller: 'questions', action: 'show', id: @answer.question_id
     end
   end
 
   # DELETE /answers/1 or /answers/1.json
   def destroy
-    @answer.destroy
-    respond_to do |format|
-      format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id, notice: "Answer was successfully destroyed." }
-      format.json { head :no_content }
+    if current_user.id != @answer.user_id
+      @answer.destroy
+      respond_to do |format|
+        flash[:notice] = "Answer was successfully destroyed."
+        format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id }
+        format.json { head :no_content }
+      end
+    else
+      flash[:alert] =  "Not Authorized User"
+      redirect_to controller: 'questions', action: 'show', id: @answer.question_id
     end
   end
   
