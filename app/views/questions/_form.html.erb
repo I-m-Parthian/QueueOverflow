@@ -19,6 +19,11 @@
     <%= form.select :tag, %w[C++ Java Ruby JS Sql Postgres Others]%>
   </div>
 
+  <div class="field">
+    <% form.label :user_id %>
+    <%= form.number_field :user_id, value: current_user.id, type: :hidden %>
+  </div> 
+
   <div class="actions">
     <%= form.submit %>
   </div>

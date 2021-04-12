@@ -11,7 +11,6 @@
     </div>
   <% end %>
 
-  <% request.params.inspect %>
 
   <div class="field">
     <%= form.label :content %>
@@ -20,18 +19,23 @@
 
   <div class="field">
     <% form.label :up_vote %>
-    <%= form.number_field :up_vote, value: 0, type: :hidden %>
+    <%= form.number_field :up_vote, value: answer.up_vote.nil? ? 0 : answer.up_vote, type: :hidden %>
   </div>
 
   <div class="field">
     <% form.label :down_vote %>
-    <%= form.number_field :down_vote, value: 0, type: :hidden %>
+    <%= form.number_field :down_vote, value: answer.down_vote.nil? ? 0 : answer.down_vote, type: :hidden %>
   </div>
 
-  <div class="field">
+   <div class="field">
     <% form.label :question_id %>
-    <%= form.number_field :question_id, value: params['format'], type: :hidden %>
-  </div>
+    <%= form.number_field :question_id, value: params['question'], type: :hidden %>
+  </div> 
+
+  <div class="field">
+    <% form.label :user_id %>
+    <%= form.number_field :user_id, value: current_user.id, type: :hidden %>
+  </div> 
 
   <div class="actions">
     <%= form.submit %>

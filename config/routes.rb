@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ForestLiana::Engine => '/forest'
   resources :answers
   resources :questions
   devise_for :users
@@ -13,5 +14,6 @@ Rails.application.routes.draw do
   end 
 
   put '/increment/:id/', to: "increment#increment_votes", as: 'increment'
+
   
 end

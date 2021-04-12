@@ -19,6 +19,9 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1/edit
   def edit
+    if current_user.id != @question.user_id
+      redirect_to @question, alert: "Not Authorized User"
+    end
   end
 
   # POST /questions or /questions.json
@@ -38,23 +41,31 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /questions/1 or /questions/1.json
   def update
-    respond_to do |format|
-      if @question.update(question_params)
-        format.html { redirect_to @question, notice: "Question was successfully updated." }
-        format.json { render :show, status: :ok, location: @question }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+    if current_user.id == @question.user_id
+      respond_to do |format|
+        if @question.update(question_params)
+          format.html { redirect_to @question, notice: "Question was successfully updated." }
+          format.json { render :show, status: :ok, location: @question }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @question.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to @question, alert: "Not Authorized User"
     end
   end
 
   # DELETE /questions/1 or /questions/1.json
   def destroy
-    @question.destroy
-    respond_to do |format|
-      format.html { redirect_to questions_url, notice: "Question was successfully destroyed." }
-      format.json { head :no_content }
+    if current_user.id == @question.user_id
+      @question.destroy
+      respond_to do |format|
+        format.html { redirect_to questions_url, notice: "Question was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to @question, alert: "Not Authorized User"
     end
   end
 
@@ -66,6 +77,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:content, :tag)
+      params.require(:question).permit(:content, :tag, :user_id)
     end
 end
