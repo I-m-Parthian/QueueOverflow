@@ -1,6 +1,9 @@
-<h1>Editing Question</h1>
+<% content_for :header do %>
+    <title>Update Question - Queue Overflow</title>
+<% end %>
 
+<div class="container">
+  <h3>Update this Question</h3><hr>
+</div>
 <%= render 'form', question: @question %>
 
-<%= link_to 'Show', @question %> |
-<%= link_to 'Back', questions_path %>

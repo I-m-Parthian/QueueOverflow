@@ -1,30 +1,35 @@
-<%= form_with(model: question) do |form| %>
-  <% if question.errors.any? %>
-    <div id="error_explanation">
-      <div class="alert alert-danger">
-        <% question.errors.each do |error| %>
-        <div><%= error.full_message %></div>
-      <% end %>
+
+<div class="container">
+  <%= form_with(model: question) do |form| %>
+    <% if question.errors.any? %>
+      <div id="error_explanation">
+        <div class="alert alert-danger">
+          <% question.errors.each do |error| %>
+          <div><%= error.full_message %></div>
+        <% end %>
+        </div>
       </div>
+    <% end %>
+
+    <div class="field form-group">
+      <%= form.label :content, 'Question Content' %>
+      <%= form.text_area :content, class:'form-control' %>
+    </div>
+
+    <div class="field form-group">
+      <%= form.label "Select tag" %>
+      <%= form.select :tag, %w[C++ Java Ruby JS Sql Postgres Others]%>
+    </div>
+
+    <div class="field">
+      <% form.label :user_id %>
+      <%= form.number_field :user_id, value: current_user.id, type: :hidden %>
+    </div> 
+
+    <div class="actions">
+      <%= form.submit 'Publish Question', class:'btn btn-default btn-box btn-blue' %>
+      <%= link_to 'Back', questions_path, class:'btn btn-warning btn-orange btn-box' %>
     </div>
   <% end %>
+</div>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div class="field">
-    <%= form.label "Select tag" %>
-    <%= form.select :tag, %w[C++ Java Ruby JS Sql Postgres Others]%>
-  </div>
-
-  <div class="field">
-    <% form.label :user_id %>
-    <%= form.number_field :user_id, value: current_user.id, type: :hidden %>
-  </div> 
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

@@ -1,5 +1,10 @@
-<h1>New Answer</h1>
+<% content_for :header do %>
+    <title>Give an Answer - Queue Overflow</title>
+<% end %>
+<div class="container">
+  <h3>Give an Answer</h3><hr>
+</div>
 
 <%= render 'form', answer: @answer %>
 
-<%= link_to 'Back', answers_path %>
+

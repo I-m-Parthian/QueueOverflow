@@ -13,8 +13,10 @@
         <h5 class='text-left'><i class="fa fa-hand-o-right"></i> <%= question.content %></h5>
         <p class="text-left">
           <%= link_to "Open in new tab", question, class:'btn btn-info btn-xs', 'target': '_blank' %>
-          <%= link_to 'Edit', edit_question_path(question), class:'btn btn-default btn-xs' %>
-          <%= link_to 'Delete this question', question, class:'btn btn-danger btn-xs', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% if user_signed_in? && current_user.id == question.user_id  %>
+            <%= link_to 'Edit', edit_question_path(question), class:'btn btn-default btn-xs' %>
+            <%= link_to 'Delete this question', question, class:'btn btn-danger btn-xs', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
         </p>
       <% end %>
     </div>

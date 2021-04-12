@@ -1,43 +1,48 @@
-<%= form_with(model: answer) do |form| %>
-  <% if answer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
 
-      <ul>
-        <% answer.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="container">
+  <%= form_with(model: answer) do |form| %>
+    <% if answer.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
+
+        <ul>
+          <% answer.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+    <div class="field form-group">
+      <%= form.label :content, 'Answer Content' %>
+      <%= form.text_area :content, class:'form-control' %>
+    </div>
+
+    <div class="field">
+      <% form.label :up_vote %>
+      <%= form.number_field :up_vote, value: answer.up_vote.nil? ? 0 : answer.up_vote, type: :hidden %>
+    </div>
+
+    <div class="field">
+      <% form.label :down_vote %>
+      <%= form.number_field :down_vote, value: answer.down_vote.nil? ? 0 : answer.down_vote, type: :hidden %>
+    </div>
+
+    <div class="field">
+      <% form.label :question_id %>
+      <%= form.number_field :question_id, value: params['question'], type: :hidden %>
+    </div>
+
+    <div class="field">
+      <% form.label :user_id %>
+      <%= form.number_field :user_id, value: current_user.id, type: :hidden %>
+    </div> 
+
+    <div class="actions">
+      <%= form.submit 'Publish Your Answer', class:'btn btn-default btn-box btn-blue' %>
+      <%= link_to 'Back', answers_path, class:'btn btn-default btn-box btn-orange' %>
     </div>
   <% end %>
+</div>
 
-
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div class="field">
-    <% form.label :up_vote %>
-    <%= form.number_field :up_vote, value: answer.up_vote.nil? ? 0 : answer.up_vote, type: :hidden %>
-  </div>
-
-  <div class="field">
-    <% form.label :down_vote %>
-    <%= form.number_field :down_vote, value: answer.down_vote.nil? ? 0 : answer.down_vote, type: :hidden %>
-  </div>
-
-   <div class="field">
-    <% form.label :question_id %>
-    <%= form.number_field :question_id, value: params['question'], type: :hidden %>
-  </div> 
-
-  <div class="field">
-    <% form.label :user_id %>
-    <%= form.number_field :user_id, value: current_user.id, type: :hidden %>
-  </div> 
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

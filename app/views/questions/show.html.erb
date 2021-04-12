@@ -1,48 +1,54 @@
-
-<p>
-  <strong>Content:</strong>
-  <%= @question.content %>
-</p>
-
-<p>
-  <strong>Tag:</strong>
-  <%= @question.tag %>
-</p>
-
-
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
-<br>
-<br>
-<% @a = Answer.where(question_id: @question.id) %>
-
-<% if @a.inspect.length > 28 %>
-  <table>
-    <thead>
-      <tr>
-        <th>Content</th>
-        <th>Up vote</th>
-        <th>Down vote</th>
-        <th colspan="5"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @a.each do |answer| %>
-        <tr>
-          <td><%= answer.content%></td>
-          <td><%= answer.up_vote %></td>
-          <td><%= answer.down_vote %></td>
-          <td><%= link_to 'Show', answer %></td>
-          <% if user_signed_in? && current_user.id == answer.user_id  %>
-            <td><%= link_to 'Edit', edit_answer_path(answer, question: @question.id) %></td>
-            <td><%= link_to 'Destroy', answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end  %>
-          <td><%= link_to 'Up_Vote',  increment_path(answer,'up_vote'), method: :put %></td>
-          <td><%= link_to 'Down_Vote', increment_path(answer,'down_vote'), method: :put %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<% content_for :header do %>
+    <title><%= @question.content %> - Queue Overflow</title>
 <% end %>
-<%= link_to 'New Answer', new_answer_path(:question => @question.id) %>
+
+<div class="container">
+  <h3><i class="fa fa-hand-o-right"></i> <%= @question.content %></h3>
+  <%= link_to 'Ask Question', new_question_path, class:'btn btn-default btn-box btn-blue pull-right' %> <br>
+  Tags: <span class="btn btn-default btn-xs"><%= @question.tag %></span>
+  <% if user_signed_in? && current_user.id == @question.user_id  %>
+    <%= link_to 'Edit', edit_question_path(@question), class:'btn btn-default btn-xs' %>
+  <% end %>
+  <%= link_to 'Go Back', questions_path, class:'btn btn-default btn-xs' %>
+  <hr>
+  <% @a = Answer.where(question_id: @question.id) %>
+  <% if @a.inspect.length > 28 %>
+    <% @a.each do |answer| %>
+    <div class="row">
+      <div class="col-xs-1 text-center">
+        <%= link_to  increment_path(answer,'up_vote'), method: :put do %>
+          <i class="fa fa-caret-up vote-icon"></i>
+        <% end %>
+        <br>
+        <i class="fa fa-arrow-up"></i> <%= answer.up_vote %>
+        <i class="fa fa-arrow-down"></i> <%= answer.down_vote %>
+        <br>
+        <%= link_to  increment_path(answer,'down_vote'), method: :put do %>
+          <i class="fa fa-caret-down vote-icon"></i>
+        <% end %>
+      </div>
+      <div class="col-xs-11">
+        <div class="box" style='padding:5px;margin:5px;'>
+          <p class="text-left ans-text">
+          <%= answer.content %>
+          <br>
+          <% if user_signed_in? && current_user.id == answer.user_id  %>
+            <td><%= link_to 'Edit', edit_answer_path(answer, question: @question.id), class:'btn btn-default btn-xs' %></td>
+            <td><%= link_to 'Delete this answer', answer, class:'btn btn-danger btn-xs', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end  %>
+          <br>
+        </p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+  <br><br>
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+      <%= link_to 'Give Your Answer', new_answer_path(:question => @question.id), class:'btn btn-default btn-box btn-blue btn-block' %>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+</div>
