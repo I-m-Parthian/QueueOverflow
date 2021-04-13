@@ -9,9 +9,14 @@
   </h3><hr>
   <% @questions.each do |question| %>
     <div class="box" style='padding:5px;margin:5px'>
+
+    <!-- styling pending -->
+    <%= "answer count:  #{Answer.where(question_id: question.id).count}" %>
+    <!-- -->
+
       <%= link_to question do %>
         <h5 class='text-left'><i class="fa fa-hand-o-right"></i> <%= question.content %></h5>
-
+        
         <!-- styling pending -->
         <p class="lead"> <%= 'user: '+ User.find(question.user_id).name %></p>
         <p class="lead"> <%= time_ago_in_words question.created_at %></p>
