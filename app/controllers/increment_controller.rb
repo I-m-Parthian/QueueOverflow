@@ -23,7 +23,7 @@ class IncrementController < ApplicationController
             end
             redirect_to controller: 'questions', action: 'show', id: @answer.question_id
         else
-            flash[:alert] = "Please Sign In..."
+            flash[:alert] = "Please Sign in to vote."
             redirect_to new_user_session_path
         end
     end
