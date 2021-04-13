@@ -10,6 +10,7 @@ class AnswersController < ApplicationController
 
   # GET /answers/1 or /answers/1.json
   def show
+    redirect_to controller: 'questions', action: 'index'
   end
 
 
@@ -21,7 +22,7 @@ class AnswersController < ApplicationController
   # GET /answers/1/edit
   def edit
     if current_user.id != @answer.user_id
-      flash[:alert] =  "Not Authorized User"
+      flash[:alert] =  "Not Authorized User!!"
       redirect_to controller: 'questions', action: 'show', id: @answer.question_id
     end
   end
@@ -29,13 +30,13 @@ class AnswersController < ApplicationController
   # POST /answers or /answers.json
   def create
     if answer_params['content'].length == 0
-      flash[:alert] = "answer can't be blank."
+      flash[:alert] = "Nice try, answer can't be blank!!"
       redirect_to controller: 'questions', action: 'show', id: answer_params['question_id']
     else
       @answer = Answer.new(answer_params)
       respond_to do |format|
         if @answer.save
-          flash[:notice] = "Answer was successfully created"
+          flash[:notice] = "Answer was successfully created!!"
           format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id}
           format.json { render :show, status: :created, location: @answer }
         else
@@ -48,10 +49,10 @@ class AnswersController < ApplicationController
 
   # PATCH/PUT /answers/1 or /answers/1.json
   def update
-    if current_user.id != @answer.user_id
+    if current_user.id == @answer.user_id
       respond_to do |format|
         if @answer.update(answer_params)
-          flash[:notice] = "Answer was successfully updated"
+          flash[:notice] = "Answer was successfully updated!!"
           format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id }
           format.json { render :show, status: :ok, location: @answer }
         else
@@ -60,7 +61,7 @@ class AnswersController < ApplicationController
         end
       end
     else
-      flash[:alert] =  "Not Authorized User"
+      flash[:alert] =  "Not Authorized User!!"
       redirect_to controller: 'questions', action: 'show', id: @answer.question_id
     end
   end
@@ -70,12 +71,12 @@ class AnswersController < ApplicationController
     if current_user.id == @answer.user_id
       @answer.destroy
       respond_to do |format|
-        flash[:notice] = "Answer was successfully destroyed."
+        flash[:notice] = "Answer was successfully destroyed!!"
         format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id }
         format.json { head :no_content }
       end
     else
-      flash[:alert] =  "Not Authorized User"
+      flash[:alert] =  "Not Authorized User!!"
       redirect_to controller: 'questions', action: 'show', id: @answer.question_id
     end
   end
