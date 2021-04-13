@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   end 
 
   put '/increment/:id/', to: "increment#increment_votes", as: 'increment'
-
+  post '/answers', to: "question#index"
   
 end

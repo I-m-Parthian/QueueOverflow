@@ -22,6 +22,10 @@ class QuestionsController < ApplicationController
     if current_user.id != @question.user_id
       redirect_to @question, alert: "Not Authorized User"
     end
+    @a = Answer.find_by(question_id: @question.id)
+    if @a.inspect.length > 28
+      redirect_to @question, alert: "Question has already been answered, so can't be edited."
+    end
   end
 
   # POST /questions or /questions.json

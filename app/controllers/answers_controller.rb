@@ -5,6 +5,7 @@ class AnswersController < ApplicationController
   # GET /answers or /answers.json
   def index
     @answers = Answer.all
+    redirect_to controller: 'questions', action: 'index'
   end
 
   # GET /answers/1 or /answers/1.json
@@ -27,15 +28,20 @@ class AnswersController < ApplicationController
 
   # POST /answers or /answers.json
   def create
-    @answer = Answer.new(answer_params)
-    respond_to do |format|
-      if @answer.save
-        flash[:notice] = "Answer was successfully created"
-        format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id}
-        format.json { render :show, status: :created, location: @answer }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
+    if answer_params['content'].length == 0
+      flash[:alert] = "answer can't be blank."
+      redirect_to controller: 'questions', action: 'show', id: answer_params['question_id']
+    else
+      @answer = Answer.new(answer_params)
+      respond_to do |format|
+        if @answer.save
+          flash[:notice] = "Answer was successfully created"
+          format.html { redirect_to controller: 'questions', action: 'show', id: @answer.question_id}
+          format.json { render :show, status: :created, location: @answer }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @answer.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -61,7 +67,7 @@ class AnswersController < ApplicationController
 
   # DELETE /answers/1 or /answers/1.json
   def destroy
-    if current_user.id != @answer.user_id
+    if current_user.id == @answer.user_id
       @answer.destroy
       respond_to do |format|
         flash[:notice] = "Answer was successfully destroyed."
