@@ -11,6 +11,12 @@
     <div class="box" style='padding:5px;margin:5px'>
       <%= link_to question do %>
         <h5 class='text-left'><i class="fa fa-hand-o-right"></i> <%= question.content %></h5>
+
+        <!-- styling pending -->
+        <p class="lead"> <%= 'user: '+ User.find(question.user_id).name %></p>
+        <p class="lead"> <%= time_ago_in_words question.created_at %></p>
+        <!-- -->
+
         <p class="text-left">
           <%= link_to "Open in new tab", question, class:'btn btn-info btn-xs', 'target': '_blank' %>
           <% if user_signed_in? && current_user.id == question.user_id  %>
