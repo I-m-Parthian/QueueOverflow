@@ -4,12 +4,17 @@ class QuestionsController < ApplicationController
 
   # GET /questions or /questions.json
   def index
-    @questions = Question.all
+    # @questions = Question.all
+    @questions = Question.search(params[:search])
+    if @questions.blank?
+      flash[:alert] = "No Questions found, It would be great if you post one."
+    else
+      flash[:alert] = nil
+    end
   end
 
   # GET /questions/1 or /questions/1.json
   def show
-    
   end
 
   # GET /questions/new
