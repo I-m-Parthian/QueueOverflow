@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     get '/users', to: 'devise/registrations#new'
     get '/users/password', to: 'devise/passwords#new'
   end 
-
   put '/increment/:id/', to: "increment#increment_votes", as: 'increment'
   
 end

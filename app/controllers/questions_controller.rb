@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1 or /questions/1.json
   def show
+    puts "ques: #{@question}"
   end
 
   # GET /questions/new
@@ -81,7 +82,11 @@ class QuestionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question
-      @question = Question.find(params[:id])
+      if Question.find_by(id: params[:id]).blank?
+        render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false 
+      else
+        @question = Question.find(params[:id]) 
+      end
     end
 
     # Only allow a list of trusted parameters through.
