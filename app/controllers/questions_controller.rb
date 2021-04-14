@@ -15,16 +15,24 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1 or /questions/1.json
   def show
-    puts "ques: #{@question}"
+    if params[:search].present?
+      redirect_to questions_path(:search => params[:search], :commit => "search")
+    end
   end
 
   # GET /questions/new
   def new
+    if params[:search].present?
+      redirect_to questions_path(:search => params[:search], :commit => "search")
+    end
     @question = Question.new
   end
 
   # GET /questions/1/edit
   def edit
+    if params[:search].present?
+      redirect_to questions_path(:search => params[:search], :commit => "search")
+    end
     if current_user.id != @question.user_id
       redirect_to @question, alert: "Not Authorized User"
     end

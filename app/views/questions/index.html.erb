@@ -11,6 +11,7 @@
     <div class="box" style='padding:5px;margin:5px'>
 
     <!-- styling pending -->
+    <%= "tag: #{question.tag}" %>
     <%= "answer count:  #{Answer.where(question_id: question.id).count}" %>
     <!-- -->
 
