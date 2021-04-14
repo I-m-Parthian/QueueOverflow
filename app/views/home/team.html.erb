@@ -65,8 +65,13 @@
                 <p class="text-left" style='font-size:18px;'>
                     Stack Overflow for Teams is a knowledge management & collaboration solution that technologists already trust.
                 </p><br><br>
-                <%= link_to "Join the Community", new_user_registration_path, class:'btn btn-default btn-box btn-orange' %>
-                <%= link_to "Create an Account", new_user_registration_path, class:'btn btn-default btn-box btn-blue' %>
+                <% if user_signed_in? %>
+                    <%= link_to "Visit Question Page", questions_path, class:'btn btn-default btn-box btn-orange' %>
+                <% else %>
+                    <%= link_to "Join the Community", new_user_registration_path, class:'btn btn-default btn-box btn-orange' %>
+                    <%= link_to "Create an Account", new_user_registration_path, class:'btn btn-default btn-box btn-blue' %>
+                <% end %>
+                    
             </div>
         </div>
         <div class="col-sm-6">

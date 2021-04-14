@@ -11,7 +11,12 @@
                 <h4>
                     Find the best answer to your technical question, help others answer theirs
                 </h4><br>
-                <%= link_to "Join the Community", new_user_registration_path, class:'btn btn-default btn-box btn-orange' %>
+                <% if user_signed_in? %>
+                    <%= link_to "Visit Question Page", questions_path, class:'btn btn-default btn-box btn-orange' %>
+                <% else %>
+                    <%= link_to "Join the Community", new_user_registration_path, class:'btn btn-default btn-box btn-orange' %>
+                <% end %>
+                
             </div>
         </div>
         <div class="col-sm-5">
@@ -20,7 +25,12 @@
                 <h4>
                     Want a secure, private space for your technical knowledge?
                 </h4><br>
-                <%= link_to "Create an Account", new_user_registration_path, class:'btn btn-default btn-box btn-blue' %>
+                <% if user_signed_in? %>
+                    <%= link_to "Visit Question Page", questions_path, class:'btn btn-default btn-box btn-blue' %>
+                <% else %>
+                    <%= link_to "Create an Account", new_user_registration_path, class:'btn btn-default btn-box btn-blue' %>
+                <% end %>
+                    
             </div>
         </div>
         <div class="col-sm-1"></div>
@@ -76,7 +86,11 @@
                         <p>
                             A community-based space to find and contribute answers to technical challenges, and one of the most popular websites in the world.
                         </p><br>
-                        <%= link_to "Join the Community", new_user_registration_path, class:'btn btn-default btn-box btn-orange' %>
+                        <% if user_signed_in? %>
+                            <%= link_to "Visit Question Page", questions_path, class:'btn btn-default btn-box btn-orange' %>
+                        <% else %>
+                            <%= link_to "Join the Community", new_user_registration_path, class:'btn btn-default btn-box btn-orange' %>
+                        <% end %>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -90,7 +104,11 @@
                         <p>
                             A web-based platform to increase productivity, decrease cycle times, accelerate time to market, and protect institutional knowledge.
                         </p><br>
-                        <%= link_to "Create an Account", new_user_registration_path, class:'btn btn-default btn-box btn-blue' %>
+                        <% if user_signed_in? %>
+                            <%= link_to "Visit Question Page", questions_path, class:'btn btn-default btn-box btn-blue' %>
+                        <% else %>
+                            <%= link_to "Create an Account", new_user_registration_path, class:'btn btn-default btn-box btn-blue' %>
+                        <% end %>
                     </div>
                 </div>
             </div>

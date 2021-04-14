@@ -1,6 +1,5 @@
 <% content_for :header do %>
     <title>Sign Up - Queue Overflow</title>
-    
 <% end %>
 
 
@@ -49,12 +48,17 @@
               <em style='color:red;'>(<%= @minimum_password_length %> characters minimum)</em>
               <% end %><br />
               <%= f.password_field :password, autocomplete: "new-password", class:'form-control' %>
+              <label for="password" class='hint'>
+                Passwords must contain at least six characters, including at least 1 letter and 1 number.
+              </label>
             </div>
             <div class="field text-left form-group">
               <%= f.label :password_confirmation %><br />
               <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'form-control' %>
             </div>
-
+            <label for="" class="hint">
+              By clicking “Sign up”, you agree to our terms of service, privacy policy and cookie policy.
+            </label>
             <div class="actions">
               <%= f.submit "Sign up", class:'btn btn-info btn-block nav-signup-btn' %>
             </div>
