@@ -4,8 +4,8 @@ class Question < ApplicationRecord
     belongs_to :user
 
     def self.search(search)
-        if search 
-            where(["tag LIKE ?","%#{search}%"]).order(:updated_at).reverse_order
+        if search
+            where(["tag LIKE ?","%#{search.humanize}%"]).order(:updated_at).reverse_order
         else
             all.order(:updated_at).reverse_order
         end

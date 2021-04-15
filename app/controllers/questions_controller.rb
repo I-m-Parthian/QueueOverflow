@@ -17,6 +17,8 @@ class QuestionsController < ApplicationController
   def show
     if params[:search].present?
       redirect_to questions_path(:search => params[:search], :commit => "search")
+    else
+      flash[:alert] = nil
     end
   end
 
@@ -24,6 +26,8 @@ class QuestionsController < ApplicationController
   def new
     if params[:search].present?
       redirect_to questions_path(:search => params[:search], :commit => "search")
+    else
+      flash[:alert] = nil
     end
     @question = Question.new
   end
@@ -32,6 +36,8 @@ class QuestionsController < ApplicationController
   def edit
     if params[:search].present?
       redirect_to questions_path(:search => params[:search], :commit => "search")
+    else
+      flash[:alert] = nil
     end
     if current_user.id != @question.user_id
       redirect_to @question, alert: "Not Authorized User"
