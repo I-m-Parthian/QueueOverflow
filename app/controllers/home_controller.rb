@@ -22,5 +22,14 @@ class HomeController < ApplicationController
       flash[:alert] = nil
     end
   end
+
+  def error404
+    if params[:search].present?
+      redirect_to questions_path(:search => params[:search], :commit => "search")
+    else
+      flash[:alert] = nil
+    end
+  end
+  
   
 end

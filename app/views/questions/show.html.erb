@@ -23,6 +23,7 @@
 
   <% if user_signed_in? && current_user.id == @question.user_id && Answer.find_by(question_id: @question.id).blank? %>
     <%= link_to 'Edit', edit_question_path(@question), class:'btn btn-default btn-xs' %>
+    <%= link_to 'Delete this question', @question, class:'btn btn-danger btn-xs', method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>
   <hr>
   <% @a = Answer.where(question_id: @question.id).order(:up_vote).reverse_order %>
