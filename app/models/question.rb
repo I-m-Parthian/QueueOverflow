@@ -5,9 +5,9 @@ class Question < ApplicationRecord
 
     def self.search(search)
         if search 
-            where(["tag LIKE ?","%#{search}%"])
+            where(["tag LIKE ?","%#{search}%"]).order(:updated_at).reverse_order
         else
-            all
+            all.order(:updated_at).reverse_order
         end
     end 
 end
