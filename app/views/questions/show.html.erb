@@ -21,7 +21,7 @@
     </i>
   </p>
 
-  <% if user_signed_in? && current_user.id == @question.user_id  %>
+  <% if user_signed_in? && current_user.id == @question.user_id && Answer.find_by(question_id: @question.id).blank? %>
     <%= link_to 'Edit', edit_question_path(@question), class:'btn btn-default btn-xs' %>
   <% end %>
   <hr>
