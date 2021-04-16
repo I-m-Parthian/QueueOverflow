@@ -17,8 +17,6 @@ class QuestionsController < ApplicationController
   def show
     if params[:search].present?
       redirect_to questions_path(:search => params[:search], :commit => "search")
-    else
-      flash[:alert] = nil
     end
   end
 

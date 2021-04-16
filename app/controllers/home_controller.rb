@@ -29,6 +29,7 @@ class HomeController < ApplicationController
     else
       flash[:alert] = nil
     end
+    render status: 404
   end
   
   

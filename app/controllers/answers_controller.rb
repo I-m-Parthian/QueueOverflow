@@ -22,7 +22,9 @@ class AnswersController < ApplicationController
   # GET /answers/1/edit
   def edit
     if current_user.id != @answer.user_id
-      flash[:alert] =  "Not Authorized User!!"
+      flash[:alert] =  "Not Authorized!!"
+      redirect_to controller: 'questions', action: 'show', id: @answer.question_id
+    elsif !params['question'].present?
       redirect_to controller: 'questions', action: 'show', id: @answer.question_id
     end
   end
@@ -49,7 +51,7 @@ class AnswersController < ApplicationController
 
   # PATCH/PUT /answers/1 or /answers/1.json
   def update
-    if current_user.id == @answer.user_id
+    if current_user.id == @answer.user_id && params['answer']['question_id'].present?
       respond_to do |format|
         if @answer.update(answer_params)
           flash[:notice] = "Answer was successfully updated!!"
