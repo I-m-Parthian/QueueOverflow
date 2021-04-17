@@ -1,24 +1,5 @@
-# README
+# QueueOverflow
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Basic clone of [StackOverflow](https://stackoverflow.com/) implemented in [RubyonRails](https://rubyonrails.org/)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Hosted @ [QueueOverflow](https://berk-overflow.herokuapp.com/)
